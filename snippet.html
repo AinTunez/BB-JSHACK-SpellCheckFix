@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    window.onload = function() {
+        setTimeout(fixAllSpans, 5000);
+    };
+
+function fixAllSpans() {
+    var iframes = document.querySelectorAll('.mceIframeContainer iframe');        
+    for (var i = 0; i < iframes.length; i++) {
+        fixSpan(iframes[i]);
+    }
+}
+
+function fixSpan(iframe) {        
+    var doc = iframe.contentDocument;
+    var spans = doc.getElementsByTagName('span');
+    for (var i = 0; i < spans.length; i++) {
+        var span = spans[i];            
+        var tag = span.outerHTML.substring(0,6).trim();  
+        if (tag === '<span>') {
+            console.log('FOUND: <span>' + span.textContent + '</span>');
+            span.parentNode.replaceChild(document.createTextNode(span.textContent), span);                
+        }
+    }    
+}
+</script>
