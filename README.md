@@ -28,5 +28,15 @@ for (var i = 0; i < spans.length; i++) {
     }
 }
 ```
+5) Re-run the <code>fixSpan<code> method if any tags remain.
+```javascript
+if (doc.documentElement.innerHTML.includes('<span>')) {
+    console.log('Fix not complete, re-running...');
+    fixSpan(iframe);
+} else {
+    console.log('Fix complete.');
+}
+```
+
 ## Why it works
 Any extra <code>span</code> elements are **always** the direct parent of the <code>textNode</code> containing the "misspelled" word (or of another extra <code>span</code> element). Formatting or inline styling would occur outside that scope and would thus be unaffected.
