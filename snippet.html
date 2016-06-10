@@ -6,7 +6,8 @@
 function fixAllSpans() {
     var iframes = document.querySelectorAll('.mceIframeContainer iframe');        
     for (var i = 0; i < iframes.length; i++) {
-        fixSpan(iframes[i]);
+        console.log('Starting spellCheckFix on iframes[' + i + ']...');
+        fixSpan(iframes[i]);        
     }
 }
 
