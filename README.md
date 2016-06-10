@@ -28,7 +28,7 @@ for (var i = 0; i < spans.length; i++) {
     }
 }
 ```
-5) Re-run the <code>fixSpan<code> method if any tags remain.
+5) Re-run the <code>fixSpan</code> method if any tags remain.
 ```javascript
 if (doc.documentElement.innerHTML.includes('<span>')) {
     console.log('Fix not complete, re-running...');
