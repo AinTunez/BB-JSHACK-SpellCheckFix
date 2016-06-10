@@ -9,7 +9,8 @@ var iframes = document.querySelectorAll('.mceIframeContainer iframe');
 2) For each one, run the <code>fixSpan</code> method.
 ```javascript
 for (var i = 0; i < iframes.length; i++) {
-    fixSpan(iframes[i]);
+    console.log('Starting spellCheckFix on iframes[' + i + ']...');
+    fixSpan(iframes[i]);        
 }
 ```
 3) In the <code>fixSpan</code> method, find all <code>span</code> elements.
@@ -21,7 +22,7 @@ var spans = doc.getElementsByTagName('span');
 ```javascript
 for (var i = 0; i < spans.length; i++) {
     var span = spans[i];            
-    var tag = span.outerHTML.substring(0,6).trim();  
+    var tag = span.outerHTML.slice(0,6);
     if (tag === '<span>') {
         console.log('FOUND: <span>' + span.textContent + '</span>');
         span.parentNode.replaceChild(document.createTextNode(span.textContent), span);
