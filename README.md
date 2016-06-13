@@ -16,28 +16,17 @@ for (var i = 0; i < iframes.length; i++) {
 3) In the <code>fixSpan</code> method, find all <code>span</code> elements.
 ```javascript
 var doc = iframe.contentDocument;
-var spans = doc.getElementsByTagName('span');
+var spans = doc.querySelectorAll('span');
 ```
 4) For each one, if no attributes exist, replace the element with a new <code>textNode</code> containing only the element's <code>textContent</code>.
 ```javascript
 for (var i = 0; i < spans.length; i++) {
     var span = spans[i];            
-    var tag = span.outerHTML.slice(0,6);
-    if (tag === '<span>') {
+    if (span && span.attributes.length === 0) {
         console.log('FOUND: <span>' + span.textContent + '</span>');
-        span.parentNode.replaceChild(document.createTextNode(span.textContent), span);
+        span.parentNode.replaceChild(document.createTextNode(span.textContent), span);                
     }
 }
-```
-5) Re-run the <code>fixSpan</code> method if any tags remain.
-```javascript
-if (doc.documentElement.innerHTML.includes('<span>')) {
-    console.log('Fix not complete, re-running...');
-    fixSpan(iframe);
-} else {
-    console.log('Fix complete.');
-}
-```
 
 ## Why it works
 Any extra <code>span</code> elements are **always** the direct parent of the <code>textNode</code> containing the "misspelled" word (or of another extra <code>span</code> element). Formatting or inline styling would occur outside that scope and would thus be unaffected.
