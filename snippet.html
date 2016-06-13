@@ -13,21 +13,14 @@ function fixAllSpans() {
 
 function fixSpan(iframe) {        
     var doc = iframe.contentDocument;
-    var spans = doc.getElementsByTagName('span');
+    var spans = doc.querySelectorAll('span'); //find all <span> elements
     for (var i = 0; i < spans.length; i++) {
         var span = spans[i];            
-        var tag = span.outerHTML.slice(0,6);        
-        if (tag === '<span>') {
+        if (span && span.attributes.length === 0) { //if the span still exists and has no attributes
+            //replace it with a new textNode containing its textContent
             console.log('FOUND: <span>' + span.textContent + '</span>');
             span.parentNode.replaceChild(document.createTextNode(span.textContent), span);                
         }
-    }
-    
-    if (doc.documentElement.innerHTML.includes('<span>')) {
-        console.log('Fix not complete, re-running...');
-        fixSpan(iframe);
-    } else {
-        console.log('Fix complete.');
     }
 }
 </script>
