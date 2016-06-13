@@ -3,24 +3,25 @@
         setTimeout(fixAllSpans, 5000);
     };
 
-function fixAllSpans() {
-    var iframes = document.querySelectorAll('.mceIframeContainer iframe');        
-    for (var i = 0; i < iframes.length; i++) {
-        console.log('Starting spellCheckFix on iframes[' + i + ']...');
-        fixSpan(iframes[i]);        
-    }
-}
-
-function fixSpan(iframe) {        
-    var doc = iframe.contentDocument;
-    var spans = doc.querySelectorAll('span'); //find all <span> elements
-    for (var i = 0; i < spans.length; i++) {
-        var span = spans[i];            
-        if (span && span.attributes.length === 0) { //if the span still exists and has no attributes
-            //replace it with a new textNode containing its textContent
-            console.log('FOUND: <span>' + span.textContent + '</span>');
-            span.parentNode.replaceChild(document.createTextNode(span.textContent), span);                
+    function fixAllSpans() {
+        var iframes = document.querySelectorAll('.mceIframeContainer iframe');        
+        for (var i = 0; i < iframes.length; i++) {
+            console.log('Starting spellCheckFix on iframes[' + i + ']...');
+            fixSpan(iframes[i]);        
         }
     }
-}
+
+    function fixSpan(iframe) {        
+        var doc = iframe.contentDocument;
+        var spans = doc.querySelectorAll('span'); //find all <span> elements
+        for (var i = 0; i < spans.length; i++) {
+            var span = spans[i];            
+            if (span && span.attributes.length === 0) { //if the span still exists and has no attributes
+                //replace it with a new textNode containing its textContent
+                console.log('FOUND: <span>' + span.textContent + '</span>');
+                span.parentNode.replaceChild(document.createTextNode(span.textContent), span);                
+            }
+        }
+    }
+
 </script>
